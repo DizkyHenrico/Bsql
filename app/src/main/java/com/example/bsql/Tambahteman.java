@@ -29,7 +29,6 @@ public class Tambahteman extends AppCompatActivity {
     private TextInputEditText tNama, tTelpon;
     private Button simpanBtn;
     String nm,tlp;
-    appcontroller controller = new appcontroller(this);
     int success;
 
     private static String url_insert = "http://10.0.2.2:80/Pam/insert.php";

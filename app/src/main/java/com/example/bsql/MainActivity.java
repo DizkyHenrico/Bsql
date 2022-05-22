@@ -34,16 +34,14 @@ public class  MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private Temanadapter adapter;
-    private ArrayList<Teman> temanArrayList;
-    appcontroller controler = new appcontroller(this);
-    String id, nm, tlp;
+    private ArrayList<Teman> temanArrayList = new ArrayList<>();
     private FloatingActionButton fab;
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private static String url_select = "http://10.0.2.2:80/Pam/read_data.php";
     public static final String TAG_ID = "id";
-    public static final String TAG_NAMA = "Nama";
-    public static final String TAG_TELPON = "Telpon";
+    public static final String TAG_NAMA = "nama";
+    public static final String TAG_TELPON = "telpon";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,26 +59,24 @@ public class  MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, Tambahteman.class);
+                Intent intent = new Intent(MainActivity.this,Tambahteman.class);
                 startActivity(intent);
             }
         });
-
     }
 
-    public void BacaData() {
-
+    public void BacaData(){
+        temanArrayList.clear();
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         JsonArrayRequest jArr = new JsonArrayRequest(url_select, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 Log.d(TAG, response.toString());
 
-                //parsing json
+                //Parsing json
                 for (int i = 0; i < response.length(); i++) {
                     try {
                         JSONObject obj = response.getJSONObject(i);
-
                         Teman item = new Teman();
                         item.setId(obj.getString(TAG_ID));
                         item.setNama(obj.getString(TAG_NAMA));
@@ -88,26 +84,23 @@ public class  MainActivity extends AppCompatActivity {
 
                         //menambah item ke array
                         temanArrayList.add(item);
-                    } catch (JSONException e)
-                    {
+                    } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
                 }
-
+                adapter.notifyDataSetChanged();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                VolleyLog.d(TAG, "Erorr: " + error.getMessage());
+                VolleyLog.d(TAG, "Error: " + error.getMessage());
                 error.printStackTrace();
-                Toast.makeText(MainActivity.this, "gagal", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this,"gagal", Toast.LENGTH_SHORT).show();
             }
         });
         requestQueue.add(jArr);
     }
 }
-
 
 
 
