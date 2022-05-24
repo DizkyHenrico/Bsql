@@ -125,7 +125,7 @@ public class Temanadapter extends RecyclerView.Adapter<Temanadapter.TemanViewHol
     }
 
     private void Hapusdata(final String idx){
-        String url_update = "http://10.0.2.2:80/Pam/deletetm.php";
+        String url_update = "https://20200140077.praktikumtiumy.com/deletetm.php";
         final String TAG = MainActivity.class.getSimpleName();
         final String TAG_SUCCESS = "success";
         final int[] sukses = new int[1];

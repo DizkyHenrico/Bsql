@@ -26,12 +26,12 @@ import java.util.Map;
 
 public class Tambahteman extends AppCompatActivity {
 
-    private TextInputEditText tNama, tTelpon;
+    private TextInputEditText nama, telpon;
     private Button simpanBtn;
     String nm,tlp;
     int success;
 
-    private static String url_insert = "http://10.0.2.2:80/Pam/insert.php";
+    private static String url_insert = "https://20200140077.praktikumtiumy.com/insert.php";
     private static final String TAG = Tambahteman.class.getSimpleName();
     private static final String TAG_SUCCES = "succes";
 
@@ -40,8 +40,8 @@ public class Tambahteman extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tambahteman);
 
-        tNama = (TextInputEditText) findViewById(R.id.tietNama);
-        tTelpon = (TextInputEditText) findViewById(R.id.tietTelpon);
+        nama = (TextInputEditText) findViewById(R.id.tietNama);
+        telpon = (TextInputEditText) findViewById(R.id.tietTelpon);
         simpanBtn = (Button) findViewById(R.id.buttonSave);
 
         simpanBtn.setOnClickListener(new View.OnClickListener() {
@@ -54,13 +54,13 @@ public class Tambahteman extends AppCompatActivity {
 
 public void SimpanData()
 {
-    if (tNama.getText().toString().equals("")||tTelpon.getText().toString().equals("")) {
+    if (nama.getText().toString().equals("")||telpon.getText().toString().equals("")) {
         Toast.makeText(Tambahteman.this, "Semua harus diisi data", Toast.LENGTH_SHORT).show();
     }
     else
     {
-        nm = tNama.getText().toString();
-        tlp = tTelpon.getText().toString();
+        nm = nama.getText().toString();
+        tlp = telpon.getText().toString();
 
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
 
@@ -92,8 +92,8 @@ public void SimpanData()
         @Override
         protected Map<String, String> getParams() {
             Map<String, String> params = new HashMap<>();
-            params.put("Nama", nm);
-            params.put("Telpon", tlp);
+            params.put("nama", nm);
+            params.put("telpon", tlp);
 
             return params;
         }
